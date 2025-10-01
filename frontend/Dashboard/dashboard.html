@@ -1,0 +1,188 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="dashboard.css">
+ </head>
+ <body>
+    <nav class="navbar">
+       <div class="nav-left">
+         <img src="assests/expensetrackericon.png" alt="Expense Tracker">
+       <b> Expense Splitter</b>
+        </div>
+       <div class="nav-right">
+        Welcome <span>User,  </span><button id="logoutBtn">Log out</button>
+       </div>
+    </nav>
+    <div class="body-content">
+        <div class="left-content">
+            <div class="left-top">
+                <button id="splitBtn">Split</button>
+                <button id="friendBtn">Add Friend</button>
+                <button id="groupBtn">Create Group</button>
+            </div>
+            <div class="left-bottom">
+                
+                 
+
+            </div>
+        </div>
+        <div class="right-content">
+
+            <div class="split-card">
+                <div class="split-card-header">
+                    <span id="split-header-span">Split - Metro</span>
+                </div>
+                <div class="split-card-content">
+                    <span><b>Amount</b> - 75</span>
+                    <span>Jay - 25&#8377;</span>
+                    <span>Hanuman - 25&#8377;</span>
+                    <span>Sugun - 25&#8377;</span>
+                    
+                    
+                    
+                    
+                   
+                </div>
+            </div>
+            
+
+           
+     
+            <div class="friend-card">
+                <div class="friend-header">
+                    Friends
+                </div>
+                <div class="friend-card-content">
+                    <div class="friend-card-item"> <span>Hanuman</span></div>
+                    <div class="friend-card-item"> <span>Rajiv</span></div>
+                    <div class="friend-card-item"> <span>Sugun</span></div>
+                
+                </div>
+            </div>
+             
+             <div class="group-card">
+                <div class="group-header">
+                    Groups
+                </div>
+               <div class="group-card-content">
+                <div class="group-card-item"> 
+                    <span>Trip To Goa</span>    
+                </div>
+                <div class="group-card-item"> 
+                    <span>Trip To Araku </span>
+                    
+                </div>
+               </div> 
+            </div>
+            
+        </div>
+
+         <div class="popupcover friendpopup-cover" >
+             <div class="friend-popup popup  ">
+                <div class="header">
+                   <div class="tittle">Add Friend</div>
+                    <button class="closebtn">&times;</button>
+                </div>
+                <div class="popup-content">
+                    <label for="friendName">Friend Name :</label>
+                    <input type="text" id="friendName" placeholder="Friend Name">
+                    <button id="saveFriendBtn">Add</button>
+                </div>
+                  
+                </div>
+             </div>  
+
+             <div class="popupcover grouppopup-cover" >
+                <div class="group-popup popup">
+                    <div class="header">
+                        <div class="tittle">Create Group</div>
+                         <button class="closebtn">&times;</button>
+                    </div>
+                    <div class="popup-content">
+                        <label for="groupName">Group Name :</label>
+                        <input type="text" id="groupName" placeholder="Group Name ">
+                        <button id="save-group-btn">create</button>
+                    </div>
+                    <div class="friendslist grouppopup">
+                        <span>Friends:</span>
+                        <div class="friend-item">
+                            <input type="checkbox" name="friends" id="groupfriend-101" value="101" >
+                            <label for="groupfriend-101">Hanuman</label>
+                        </div>
+                        <div class="friend-item">
+                            <input type="checkbox" name="friends" id="groupfriend-102" value="101" >
+                            <label for="groupfriend-102">Sugun</label>
+                        </div>
+                        
+                    </div>
+                </div>
+             </div> 
+
+             <div class="popupcover splitpopup-cover"  >
+                <div class="split-popup popup">
+                     <div class="header">
+                        <div class="tittle">Split</div>
+                         <button class="closebtn">&times;</button>
+                    </div>
+                    <div class="popup-content">
+                        <label for="SplitName">Split Name :</label>
+                        <input type="text" id="splitName" placeholder="Split Name ">
+                        <button id="saveSplit-btn">Split</button>
+                    </div>
+                    <div class="amount-section">
+                        <label for="amount"><span>Amount : </span></label>
+                        <input type="number" placeholder="Amount" id="amount">
+                        <span>paid By </span>
+                        <select name="paidBy" id="paidBy">
+                            <option value="">You</option>
+                            <option value="101">Hanuman</option>
+                            <option value="102">sugun</option>
+                        </select>
+                        
+                    </div>
+
+                    <div class="chooseSplit-Section">
+                        <span>Split From </span>
+                        <select   id="selectType">
+                            
+                            <option value="friends">Friends</option>
+                            <option value="groups">Groups</option>
+                        </select>
+                    </div>
+
+                     <div class="friendslist">
+                        <span>Friends:</span>
+                        <div class="friend-item">
+                            <input type="checkbox" name="friends" id="splitfriend-101" value="101" >
+                            <label for="splitfriend-101">Hanuman</label>
+                        </div>
+                        <div class="friend-item">
+                            <input type="checkbox" name="friends" id="splitfriend-102" value="101" >
+                            <label for="splitfriend-102">Sugun</label>
+                        </div>
+                        
+                    </div>
+                     <div class="grouplist">
+                        <span>Groups :</span>
+                        <div class="group-item">
+                            <input type="radio" name="groups" id="group-101" value="101" >
+                            <label for="group-101">Trip to Goa</label>
+                        </div>
+                        <div class="group-item">
+                            <input type="radio" name="groups" id="group-102"  value="102" >
+                            <label for="group-102">Trip To Araku</label>
+                        </div>
+                        
+                    </div> 
+
+                </div>
+             </div>
+        </div>
+    </div>
+ 
+    <script src="dashboard.js"></script>
+ </body>
+ </html>

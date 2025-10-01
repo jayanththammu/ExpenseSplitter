@@ -1,0 +1,20 @@
+package com.example.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.models.TransactionShareEntity;
+@Repository
+public interface TransactionShareRepository  extends JpaRepository<TransactionShareEntity,Long>{
+
+	
+	@Query(value ="SELECT t.id  as transaction_id, "+
+			"group_concat(t.shareMember separator ', ') as share_members,"+
+			" max(t.shareAmount) as share_amount"+
+			" from TransactionShareEntity t"+
+			"where t.transaction_id = :transactionId "+
+			"group_by t.transaction_id",nativeQuery = true)
+	TransactionShareRepository getShareMembers(@Param("transactionId") long transactionId);
+}

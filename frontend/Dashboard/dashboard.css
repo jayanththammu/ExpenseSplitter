@@ -1,0 +1,495 @@
+ body{
+    margin: 0;
+    overflow: hidden;
+
+ }
+button{
+    cursor: pointer;
+}
+ /* -----------------------NavBar ------------------------- */
+ 
+ .navbar{
+     height: 60px;
+    background-color: rgb(12, 1, 1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+ }
+ .nav-left{
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+    font-size: 30px;
+    color: white;
+ }
+ .nav-left img{
+    object-fit: cover;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    margin-right: 1rem;
+    margin-left: 1rem;
+
+ }
+ .nav-right{
+    font-size: 25px;
+ }
+.nav-right button{
+    height: 30px;
+    width: 80px;
+    margin-right: 1rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: rgba(165, 16, 16, 0.5);
+    color: white;
+    transition: transform 0.4s ease;
+ }
+.nav-right button:hover{
+    transform: scale(1.05);
+    background-color: rgb(107, 4, 4);
+}
+
+/*  --------------------Body Content------------------------------------- */
+ .body-content{
+    display: flex;
+    background-color: black;
+    height: 100vh;
+ }
+ /* ----------------------Left Window----------------------------------- */
+ .left-content{
+    width: 30%;
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+ }
+ .left-top{
+    flex: 0;
+    width: 100%;
+    background-color: #222;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius:10px ;
+
+ }
+ .left-top button{
+    height: 40px;
+    margin: 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(75, 120, 9,1);
+     
+    color: white;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.4s ease;
+    
+ }
+ .left-top button:hover{
+    background-color: rgba(75, 120, 9,0.5);
+    transform:scale(1.04);
+ }
+ .left-bottom{
+   flex: 1;
+    width: 100%;
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+ }
+  .left-bottom button{
+    height: 40px;
+    margin: 1rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
+    background-color: rgba(12, 146, 41,0.8);
+     transition: all 0.4s ease;
+  }
+  .left-bottom button:hover{
+    background-color: rgba(12, 146, 41,1);
+    transform:scale(1.04);
+ }
+
+ /* ---------------------Right Window-------------------------------------- */
+ .right-content{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow-y: auto;
+    
+ }
+
+ /* ----------------Pop ups --------------------------- */
+
+  /* .defaultpopup{
+    top: -100;
+    left: 0;
+    display: none;
+    transition: top 1s ease-in;
+ } */
+
+
+
+
+ .popupcover{
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: rgba(0,0,0,0.5);
+    
+
+ }
+ .activepopupcover{
+   display: flex;
+}
+
+ .popup{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    background-color: #222;
+    border-radius: 20px;
+    padding: 1rem;
+ }
+ .header{
+    display: flex;
+    justify-content: space-between;
+    margin: 8px;
+   
+ }
+  
+ .tittle{
+    font-size: 20px;
+    padding-left: 30%;
+ }
+ .header button{
+    border: none;
+    background: #222;
+    font-size: 20px;
+    color: red;
+    font-size: 30px;
+ }
+ .header button:hover{
+    color: rgba(184, 4, 4, 0.5);
+ }
+.popup-content{
+    font-size: 15px;
+ }
+.popup-content input{
+    height: 30px;
+    width: 200px;
+    padding-left: 1rem;
+    border-radius: 10px;
+   
+ }
+ .popup-content button{
+    width: 60px;
+    height: 30px;
+    border:none;
+    border-radius: 5px;
+    font-size: 15px;
+    color: white;
+    background-color: green;
+    cursor: pointer;
+    border: none;
+    outline: none;
+   
+ }
+ .friendslist{
+   display: flex;
+   flex-direction: column;
+   max-height: 100px;
+   overflow-y: auto;
+   margin-bottom: 8px;
+   
+}
+.friendslist::-webkit-scrollbar{
+     width: 5px;
+}
+.friendslist::-webkit-scrollbar-thumb{
+   
+  background: #fff;
+  border-radius: 10px;
+}
+.friendslist::-webkit-scrollbar-track{
+   background: #49484afa;
+   border-radius: 10px;
+   
+}
+.friendslist::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.friendslist::-webkit-scrollbar-button{
+  display: none;
+}
+.friendslist span{
+   font-size: 18px;
+   margin-bottom: 4px;
+}
+ .friend-item{
+   margin-left: 1rem;
+    padding-left: 1rem;
+    font-size: 18px;
+    transition: transform 0.2s ease-in;
+ }
+ .friend-item label{
+   cursor: pointer;
+ }
+ 
+ .friend-item input[type="checkbox"]{
+   appearance: none;
+  
+  width: 10px;
+  height: 10px;
+  border: 2px solid #555;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  
+ 
+}
+.friend-item input[type="checkbox"]:checked{
+    background-color: #4caf50; /* green when checked */
+  border-color: #4caf50;
+   
+    
+}
+
+.amount-section{
+   margin-top: 1rem;
+   
+}
+.amount-section input[type="number"]{
+   width: 100px;
+   height:20px;
+   border-radius: 5px;
+}
+.amount-section select{
+   height: 20px;
+   width: 100px;
+   background-color: black;
+   color: white;
+   border-radius: 10px;
+}
+.chooseSplit-Section{
+  
+   margin-top: 8px;
+   margin-bottom: 1rem;
+}
+.chooseSplit-Section select{
+   margin-left: 4px;
+   width: 220px;
+   height: 25px;
+   font-size: 15px;
+   background: black;
+   color: white;
+   padding-left: 4px;
+   border-radius: 10px;
+}
+
+
+ .grouplist{
+   display: none;
+   flex-direction: column;
+   max-height: 100px;
+   overflow-y: auto;
+   margin-bottom: 8px;
+   
+}
+.grouplist::-webkit-scrollbar{
+     width: 5px;
+}
+.grouplist::-webkit-scrollbar-thumb{
+   
+  background: #fff;
+  border-radius: 10px;
+}
+.grouplist::-webkit-scrollbar-track{
+   background: #49484afa;
+   border-radius: 10px;
+   
+}
+.grouplist::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.grouplist::-webkit-scrollbar-button{
+  display: none;
+}
+.friendslist span{
+   font-size: 18px;
+   margin-bottom: 4px;
+}
+ .group-item{
+   margin-left: 1rem;
+    padding-left: 1rem;
+    font-size: 18px;
+    transition: transform 0.2s ease-in;
+ }
+ .group-item label{
+   cursor: pointer;
+ }
+ 
+ .group-item input[type="checkbox"]{
+   appearance: none;
+  
+  width: 10px;
+  height: 10px;
+  border: 2px solid #555;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  
+ 
+}
+.group-item input[type="checkbox"]:checked{
+    background-color: #4caf50; /* green when checked */
+  border-color: #4caf50;
+   
+    
+}
+
+/* -----------------Right Content------------------ */
+
+/* ----------------Friend PopUp------------------ */
+.right-content{
+   background: #29373e;
+   border-radius: 10px;
+   color: white;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   align-content: flex-start; /* prevents extra space between rows */
+    row-gap: 0.5rem; /* optional: spacing between rows */
+    column-gap: 1rem; /* spacing between cards horizontally */
+ 
+}
+ 
+.friend-header{
+   text-align: center;
+   font-size: 20px;
+   color: rgb(244, 243, 240);
+   font-weight: 500;
+   font-style:oblique;
+}
+.friend-card-content{
+   display: flex;
+   flex-direction: column;
+   padding-left: 1rem;
+   max-height: 80px;
+   height: 100px;
+ 
+   padding-top: 4px;
+   border-radius: 10px;
+   overflow-y:auto;
+   overflow-x: hidden;
+}
+.friend-card-item{
+   font-size: 18px;
+
+   transition: color 0.4s ease-in, transform 0.2s ease-in-out;
+}
+.friend-card-item:hover{
+    color: #555;
+    transform: scale(1.03);
+}
+
+/*------------------------Group Card------------------ */
+
+.group-header{
+    text-align: center;
+   font-size: 20px;
+   color: rgb(244, 243, 240);
+   font-weight: 500;
+   font-style:oblique;
+}
+.group-card-content{
+     display: flex;
+   flex-direction: column;
+   padding-left: 1rem;
+   max-height: 80px;
+   height: 100px;
+
+   padding-top: 4px;
+   border-radius: 10px;
+   overflow-y:auto;
+   overflow-x: hidden;
+
+}
+.group-card-item{
+     font-size: 18px;
+
+   transition: color 0.4s ease-in, transform 0.2s ease-in-out;
+}
+ 
+.split-card,.group-card,.friend-card{
+   display: flex;
+   flex-direction: column;
+   width: 300px;
+   height: 150px;
+   background: #686060;
+   margin: 1rem;
+   padding: 1rem;
+   border-radius: 10px;
+   /* box-shadow: 4px 4px 4px rgba(172, 166, 166, 0.5); */
+   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+}
+.split-card:hover,.group-card:hover,.friend-card:hover{
+   transform: scale(1.01);
+   box-shadow: 4px 4px 6px rgba(172, 166, 166, 0.7);
+
+}
+.split-card-header{
+   text-align: center;
+   font-size: 20px;
+ 
+   border-top-right-radius: 10px;
+   border-top-left-radius: 10px;
+
+}
+.split-card-content{
+   margin-top: 1rem;
+   padding-left: 10px;
+   display: flex;
+   flex-direction: column; 
+   font-size: 18px;
+   max-height: 100px;
+   overflow-y: auto;
+   
+}
+
+.split-card-content b{
+   color: black;
+}
+
+.group-card-content::-webkit-scrollbar,.split-card-content::-webkit-scrollbar,.friend-card-content::-webkit-scrollbar{
+   width: 5px;
+   border-radius: 10px;
+   background: #fff;
+
+}
+.group-card-content::-webkit-scrollbar-thumb,.split-card-content::-webkit-scrollbar-thumb,.friend-card-content::-webkit-scrollbar-thumb{
+
+   
+   background: gray;
+   border-radius: 10px;
+}
+.group-card-content::-webkit-scrollbar-track,.split-card-content::-webkit-scrollbar-track,.friend-card-content::-webkit-scrollbar-track{
+
+   
+   background: #222;
+   border-radius: 10px;
+}
+
+

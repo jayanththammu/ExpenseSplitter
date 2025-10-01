@@ -1,0 +1,40 @@
+package com.example.demo.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.dtos.CreateTransactionDto;
+import com.example.demo.service.TransactionService;
+
+import jakarta.servlet.http.HttpSession;
+
+@RestController
+@RequestMapping("/transactionserver")
+public class TransactionController {
+	
+	@Autowired
+	private TransactionService transactionService;
+	
+	@PostMapping("/createsplit")
+	public ResponseEntity<String> createSplitTransaction(@RequestBody CreateTransactionDto body,HttpSession session){
+		
+		return ResponseEntity.ok(transactionService.createSplitTransaction(body, session));
+		
+	}
+	
+	@GetMapping("/getLatestSplit")
+	public ResponseEntity<v> getLatestSplit(HttpSession session){
+		
+		Optional<t> user= session.getAttribute("LoggedInUser");
+		
+	 return ResponseEntity.ok("");
+	}
+
+}

@@ -1,0 +1,163 @@
+package com.example.demo.service;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dtos.CreateTransactionDto;
+import com.example.demo.dtos.LatestSplitDto;
+import com.example.demo.models.FriendEntity;
+import com.example.demo.models.GroupEntity;
+import com.example.demo.models.TransactionEntity;
+import com.example.demo.models.TransactionShareEntity;
+import com.example.demo.models.UserEntity;
+import com.example.demo.repository.*;
+import jakarta.servlet.http.HttpSession;
+
+@Service
+public class TransactionService {
+
+    private final OtpRepository otpRepository;
+
+	@Autowired
+	private TransactionRepository transactionRepository;
+	
+	@Autowired
+	private GroupRepository groupRepository;
+	
+	@Autowired
+	private TransactionShareRepository transactionShareRepository;
+	
+	@Autowired
+	private FriendRepository friendRepository;
+
+    TransactionService(OtpRepository otpRepository) {
+        this.otpRepository = otpRepository;
+    }
+	
+	private double calculatesplit(int n,double amount) {
+		
+		return amount/n;
+		
+	}
+	
+	
+	public String createSplitTransaction(CreateTransactionDto body,HttpSession session) {
+		
+		try {
+		    System.out.println(body);
+			UserEntity user = (UserEntity) session.getAttribute("LoggedInUser");
+			
+			if(user == null) {
+				throw new Error("User Not Found");
+			}
+			
+			TransactionEntity transaction = new TransactionEntity();
+			
+			transaction.setTransactionName(body.getTransactionName());
+			LocalDateTime dateTime = LocalDateTime.now();
+			transaction.setDateTime(dateTime);
+			transaction.setAmount(body.getAmount());
+			transaction.setUserEntity(user);
+			List<FriendEntity> participants = new ArrayList<>();
+			 GroupEntity group = groupRepository.findByGroupIdWithFriends(body.getGroupId());
+			 
+			if(body.isGroupTransaction()) {
+				
+				 
+				if (group == null) throw new RuntimeException("Group not found");
+				participants = group.getFriends();
+				  
+				
+			}
+			else {
+				
+				  List<Long> friendIds = body.getFriendsId()!= null ? body.getFriendsId() : new ArrayList<>();
+				  System.out.println(friendIds);
+				    for(Long friendId :  friendIds) {
+				          Optional<FriendEntity> friend = friendRepository.findById(friendId);
+				          
+				          if(friend.isPresent())
+				          {
+				        	  FriendEntity friendEntity = friend.get();
+				        	  participants.add(friendEntity);
+				        	  
+;				          }
+				          
+				       
+				    }
+				
+			}
+			int n = participants.size()+1;
+			double shareAmount = calculatesplit(n,body.getAmount());
+			
+			List<TransactionShareEntity> shares = new ArrayList<>();
+			
+			TransactionShareEntity share = new TransactionShareEntity();
+			share.setShareMember(user.getFirstName());
+			share.setShareAmount(shareAmount);
+			share.setTransaction(transaction);
+			shares.add(share);
+			 
+			for(FriendEntity f :participants ) {
+				
+				TransactionShareEntity friendShare = new TransactionShareEntity();
+				friendShare.setShareMember(f.getFriendName());
+				friendShare.setShareAmount(shareAmount);
+				friendShare.setTransaction(transaction);
+				friendShare.setFriend(f);
+				shares.add(friendShare);
+				
+			}
+			
+			transaction.setGroup(group); 
+			transaction.setIsGroupTransaction(true);
+			transaction.setShares(shares);	
+			transactionRepository.save(transaction);
+	
+		} catch (Exception e) {
+			// TODO: handle exception
+			return e.getLocalizedMessage();
+		}
+		
+		return "Split Successfull";
+	}
+	
+	public LatestSplitDto getLatestSplit(HttpSession session) {
+		
+		UserEntity user= (UserEntity)session.getAttribute("LoggedInUser");
+		
+		LatestSplitDto latestSplit = new LatestSplitDto();
+		
+		TransactionEntity latest= transactionRepository.findLatestTransaction(user.getId());
+		Object shareMembersRaw = transactionShareRepository.getShareMembersRaw(latest.getId());
+		
+		
+		
+		List<String> shareMembersList = List.of();
+		double shareAmount = 0;
+		if(shareMembersRaw != null ) {
+			  Object[] row = (Object[])shareMembersRaw;
+			  
+			  shareMembersList = List.of(((String) row[1]).split(","));
+			   shareAmount = ((Number) row[2]).doubleValue();
+		}
+		
+		
+		latestSplit.setTransactionName(latest.getTransactionName())
+		.setAmount(latest.getAmount()).setDateTime(latest.getDateTime()).setId(latest.getId()).setShareAmount(shareAmount)
+		.setShareMembers(shareMembersList);
+		 
+		 
+		
+		
+		return latestSplit;
+	}
+	
+	
+	
+}

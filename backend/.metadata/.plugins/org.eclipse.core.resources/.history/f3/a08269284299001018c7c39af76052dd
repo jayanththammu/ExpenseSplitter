@@ -1,0 +1,68 @@
+package com.example.demo.dtos;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class LatestSplitDto {
+	
+	private Long id;
+	private double amount;
+	private String transactionName;
+	private LocalDateTime dateTime;
+	private Long transactionId;
+	private List<String> shareMembers;
+	private double shareAmount;
+	
+	public Long getTransactionId() {
+		return transactionId;
+	}
+	public void setTransactionId(Long transactionId) {
+		this.transactionId = transactionId;
+	}
+	public List<String> getShareMembers() {
+		return shareMembers;
+	}
+	public void setShareMembers(List<String> shareMembers) {
+		this.shareMembers = shareMembers;
+	}
+	public double getShareAmount() {
+		return shareAmount;
+	}
+	public void setShareAmount(double shareAmount) {
+		this.shareAmount = shareAmount;
+	}
+	public Long getId() {
+		return id;
+	}
+	public LatestSplitDto setId(Long id) {
+		this.id = id;
+		
+		return this;
+	}
+	public double getAmount() {
+		return amount;
+	}
+	public LatestSplitDto setAmount(double amount) {
+		this.amount = amount;
+		return this;
+	}
+	public String getTransactionName() {
+		return transactionName;
+	}
+	public LatestSplitDto setTransactionName(String transactionName) {
+		this.transactionName = transactionName;
+		
+		return this;
+	}
+	public LocalDateTime getDateTime() {
+		return dateTime;
+	}
+	public LatestSplitDto setDateTime(LocalDateTime dateTime) {
+		this.dateTime = dateTime;
+		return this;
+	}
+	
+	
+ 
+
+}

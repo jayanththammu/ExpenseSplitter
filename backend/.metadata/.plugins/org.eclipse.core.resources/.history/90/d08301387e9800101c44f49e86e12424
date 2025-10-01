@@ -1,0 +1,40 @@
+package com.example.demo.dtos;
+
+import java.time.LocalDateTime;
+
+public class LatestSplitDto {
+	
+	private Long id;
+	private double amount;
+	private String transactionName;
+	private LocalDateTime dateTime;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	public String getTransactionName() {
+		return transactionName;
+	}
+	public void setTransactionName(String transactionName) {
+		this.transactionName = transactionName;
+	}
+	public LocalDateTime getDateTime() {
+		return dateTime;
+	}
+	public void setDateTime(LocalDateTime dateTime) {
+		this.dateTime = dateTime;
+	}
+	
+	
+ 
+
+}

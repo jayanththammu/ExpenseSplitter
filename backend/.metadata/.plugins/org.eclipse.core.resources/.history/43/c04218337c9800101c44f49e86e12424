@@ -1,0 +1,18 @@
+package com.example.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.models.TransactionEntity;
+@Repository
+public interface TransactionRepository extends JpaRepository<TransactionEntity,Long>{
+	
+	@Query("SELECT t FROM TransactionEntity "+
+			"WHERE user_id= :[userId] "+
+			"ORDER BY date_time DESC "+
+			"LIMIT 1")
+	TransactionEntity findLatestTransaction(@Param("userId")Long userId);
+
+}

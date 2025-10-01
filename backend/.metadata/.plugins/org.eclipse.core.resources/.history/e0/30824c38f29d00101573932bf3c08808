@@ -1,0 +1,110 @@
+package com.example.demo.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dtos.AccountCreateDTO;
+import com.example.demo.dtos.ChangePasswordDto;
+import com.example.demo.dtos.LoginDto;
+import com.example.demo.models.UserEntity;
+import com.example.demo.repository.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
+
+@Service
+public class UserService {
+	
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	
+	@Autowired
+	private PasswordEncoder encoder;
+	
+
+	public String createAccount(AccountCreateDTO body) {
+		
+		try {
+			if(userRepository.findByUserName(body.getUserName()) != null) {
+				 
+					throw new Error("User Exists");
+			 
+			}
+			
+			UserEntity user = new UserEntity().setFirstName(body.getFirstName()).setLastName(body.getLastName())
+					.setUserName(body.getUserName()).setEmail(body.getEmail()).setMobileNo(body.getMobileNo());
+			
+			String hashedPassword  = encoder.encode(body.getPassword());
+			user.setPassword(hashedPassword);
+			userRepository.save(user);
+			
+		} catch (Exception e) {
+			return "Error Creating Account"+e.getMessage();
+		}
+		
+		
+		return "Account Created Succesfully";	
+	}
+	
+	public String loginUser(LoginDto body,HttpSession session) {
+		
+		try {
+			
+			UserEntity user = userRepository.findByUserName(body.getUserName());
+			
+				if(user == null) {
+					throw new Error("User Not Found");
+				}
+			
+			if(!encoder.matches(body.getPassword(), user.getPassword())) {
+				return "password does not match";
+			}
+			
+			session.setAttribute("LoggedInUser", user);
+			
+			
+			return "Login Successful";
+			
+		} catch (Exception e) {
+			return "Login Failed"+e.getMessage();
+		}
+
+	}
+	
+	public String changePassword(ChangePasswordDto body) {
+		
+		try {
+			UserEntity user = userRepository.findByUserName(body.getUserName());
+			if(user == null) {
+				return "User Not Found";
+			}
+			String hashedPassword  = encoder.encode(body.getPassword());
+			user.setPassword(hashedPassword);
+			userRepository.save(user);
+			
+			return "Password Changed Successfully";
+		} catch (Exception e) {
+			
+			return "Error Changing password"+e.getMessage();
+		}
+		
+	}
+	
+	public AccountCreateDTO getUserInfo(HttpSession session) {
+		
+		UserEntity user = (UserEntity) session.getAttribute("LoggedInUser");
+		AccountCreateDTO body = new AccountCreateDTO();
+		
+		body.setUserName(body.getUserName());
+		body.setEmail(user.getPassword());
+		body.setLastName(user.getLastName());
+		body.getMobileNo()user.getMobileNo();
+		
+		return body;
+	}
+
+}

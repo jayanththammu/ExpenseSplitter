@@ -1,0 +1,53 @@
+package com.example.demo.dtos;
+
+import java.util.List;
+
+public class CreateTransactionDto {
+
+	
+	private String transactionName;
+	private double amount;
+	private boolean groupTransaction;
+	private Long groupId;
+	List<Long> friendsId;
+	
+	public String getTransactionName() {
+		return transactionName;
+	}
+	public void setTransactionName(String transactionName) {
+		this.transactionName = transactionName;
+	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	public boolean isGroupTransaction() {
+		return groupTransaction;
+	}
+	public void setGroupTransaction(boolean isGroupTransaction) {
+		this.groupTransaction = isGroupTransaction;
+	}
+	public Long getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
+	
+	public List<Long> getFriendsId() {
+		return friendsId;
+	}
+	public void setFriendsId(List<Long> friendsId) {
+		this.friendsId = friendsId;
+	}
+	 
+	
+	
+ 
+	
+	
+	
+	
+}
